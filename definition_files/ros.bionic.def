@@ -1,0 +1,54 @@
+Bootstrap: library
+From: ubuntu:18.04
+
+%help
+  This is a container which is ready to install ROS.
+  It has tools for working with a ros installation, like rosdep and
+  rosinstall_generator, already installed.
+  This serves as a base for a ROS Melodic or ROS Eloquent installation.
+
+
+%labels
+  MAINTAINER Shane Loretz <sloretz@openrobotics.org>
+
+
+%post
+  apt-get update
+  apt-get install -y \
+    locales \
+    curl \
+    gnupg \
+    lsb-release \
+    vim \
+    software-properties-common \
+    build-essential
+
+  locale-gen en_US en_US.UTF-8
+  update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+  export LANG=en_US.UTF-8
+
+  apt-add-repository restricted
+  apt-add-repository universe
+  apt-add-repository multiverse
+  apt-add-repository "deb http://security.ubuntu.com/ubuntu `lsb_release -cs`-security main restricted universe multiverse"
+
+  curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+  echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros1-latest.list
+  echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list
+
+  apt-get update
+  apt-get install -y \
+    python-rosdep \
+    python-rosinstall-generator \
+    python3-vcstool \
+    python3-colcon-common-extensions
+
+  rosdep init
+
+  rm -rf /var/lib/apt/lists/*
+  apt-get clean
+
+
+%environment
+  export LANG=en_US.UTF-8
