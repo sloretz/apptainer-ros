@@ -1,4 +1,6 @@
-singularity build --fakeroot rosfocal.sif definition_files/ros.focal
+singularity build --fakeroot ros.focal.sandbox definition_files/ros.focal
 
 
-singularity instance start --containall --writable-tmpfs rosfocal.sif rosfocalinstance
+singularity shell --fakeroot --writable ./ros.focal.sandbox
+
+singularity shell --contain --writable ./ros.focal.sandbox
