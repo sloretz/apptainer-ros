@@ -6,7 +6,7 @@ This presents a workflow that works for developing ROS.
 ## What to do
 
 This section is meant to be used as a reference in case you forget a command.
-It may be helpful to [read about how it works](#How_it_works) as well.
+It may be helpful to [read about how it works](#how-it-works) as well.
 
 ### First time workspace setup
 
