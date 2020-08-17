@@ -46,9 +46,11 @@ This will set up a workspace for developing using [ROS Rolling Ridley](https://i
     cd ~/my_new_ws/
     ./_scripts/rootshell.bash
     # You're now 'root' inside the container
+    cd /path/to/my_new_ws/
     # Install system dependencies declared in package.xml's
     rosdep update
-    rosdep install --rosdistro rolling -ryi --from-paths ./src
+    apt update
+    rosdep install --rosdistro rolling -yi --from-paths ./src
     # If you have any other system dependencies, now is the time to install them
     sudo apt update && apt install -y this-is-not-a-real-package-name-put-your-stuff-here
     ```
