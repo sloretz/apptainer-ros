@@ -1,7 +1,7 @@
 # Singularity ROS - Workspace Workflow
 
 How should ROS workspaces and singularity be used together?
-This presents a workflow that has worked well for development on multiple versions of ROS.
+This presents a workflow that works for developing ROS.
 
 ## What to do
 
