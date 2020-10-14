@@ -27,9 +27,6 @@ This will set up a workspace for developing using [ROS Rolling Ridley](https://i
     cd ~/my_new_ws/
     # Make a mount point for `src` inside the container
     singularity exec --fakeroot --writable ros.focal.sandbox mkdir -p $(pwd)/src
-    # Make the mount point owned by you - the user who will use the workspace
-    singularity exec --fakeroot --writable ros.focal.sandbox chown -R $(whoami) $(pwd)
-    sudo chown -R $(id -u):$(id -g) ./ros.focal.sandbox/$(pwd)/..
     ```
 1. Copy scripts to the workspace, next to the `src` folder
     ```bash
