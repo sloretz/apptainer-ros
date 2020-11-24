@@ -38,8 +38,12 @@ fi
 
 if [ -r "$SINGULARITY_THING" ]
 then
-  # If it's a definition file or imagethat's readable
+  # Assum it's a definition file or image that's readable
   SANDBOX_NAME=$(basename $(echo $SINGULARITY_THING | sed -e 's/\(.def$\)\|\(.img$\)/.sandbox/'))
+elif [ -d "$SINGULARITY_THING" ]
+then
+  # Assume it's another sandbox
+  SANDBOX_NAME=$(basename $(echo $SINGULARITY_THING | sed -e 's/.sandbox$/.sandbox/'))
 else
   # Assume it's something else, like a docker or library URI
   SANDBOX_NAME=$(echo $SINGULARITY_THING | sed -e "s/^library:\/\///" | sed -e "s/^docker:\/\///" | sed -e "s/\//./g" | sed -e "s/:/./" | sed -e "s/\.\././g" | sed -e "s/$/.sandbox/")
