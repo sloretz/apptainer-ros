@@ -16,10 +16,20 @@ This will set up a workspace for developing using [ROS Rolling Ridley](https://i
     ```bash
     mkdir -p ~/my_new_ws
     ```
-1. Create a singularity workspace from a singularity definition file
+1. Create a singularity workspace from some kind of definition file or image.
     ```bash
     cd ~/my_new_ws/
-    path/to/singularity-ros/ws_workflow/make_workspace.bash path/to/singularity-ros/definition_files/ros.focal.def
+    # OPTION 1: Use one of the definition files in this repo
+    path/to/make_workspace.bash path/to/singularity-ros/definition_files/ros.focal.def
+
+    # OPTION 2: Build on top of a docker image
+    # path/to/make_workspace.bash docker://ros:rolling
+
+    # OPTION 3: Build on top of another singularity sandbox
+    # path/to/make_workspace.bash path/to/another/ros.focal.sandbox
+
+    # OPTION 4: Build on top of a singularity image
+    # path/to/make_workspace.bash path/to/some/ros.focal.img
     ```
 1. Clone your ROS packages into the `src` folder
     ```bash
