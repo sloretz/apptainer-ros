@@ -37,8 +37,7 @@ From: debian:10
 
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
-  # TODO(sloretz) use normal repos when Noetic and Foxy release
-  echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros1-stable.list
+  echo "deb http://packages.ros.org/ros-testing/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros1-testing.list
   echo "deb http://packages.ros.org/ros2-testing/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-testing.list
 
   apt-get update
