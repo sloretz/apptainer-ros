@@ -12,26 +12,14 @@ It may be helpful to [read about how it works](#how-it-works) as well.
 
 This will set up a workspace for developing using [ROS Rolling Ridley](https://index.ros.org/doc/ros2/Releases/#rolling-distribution).
 
-1. Make a workspace folder, and a `src` folder inside of that
+1. Make an empty workspace folder
     ```bash
-    mkdir -p ~/my_new_ws/src
+    mkdir -p ~/my_new_ws
     ```
-1. Create a fakeroot singularity sandbox from one of the definition files
+1. Create a singularity workspace from a singularity definition file
     ```bash
     cd ~/my_new_ws/
-    # Assumes singularity-ros is in your `$HOME` folder
-    singularity build --fakeroot --sandbox ros.focal.sandbox/ ~/singularity-ros/definition_files/ros.focal.def
-    ```
-1. Create a mount for the `src` folder inside the sandbox
-    ```bash
-    cd ~/my_new_ws/
-    # Make a mount point for `src` inside the container
-    singularity exec --fakeroot --writable ros.focal.sandbox mkdir -p $(pwd)/src
-    ```
-1. Copy scripts to the workspace, next to the `src` folder
-    ```bash
-    # Assumes singularity-ros is in your `$HOME` folder
-    cp -R ~/singularity-ros/ws_workflow/_scripts ~/my_new_ws/
+    path/to/singularity-ros/ws_workflow/make_workspace.bash path/to/singularity-ros/definition_files/ros.focal.def
     ```
 1. Clone your ROS packages into the `src` folder
     ```bash
@@ -49,12 +37,12 @@ This will set up a workspace for developing using [ROS Rolling Ridley](https://i
     apt update
     rosdep install --rosdistro rolling -yi --from-paths ./src
     # If you have any other system dependencies, now is the time to install them
-    sudo apt update && apt install -y this-is-not-a-real-package-name-put-your-stuff-here
+    apt update && apt install -y libasio-dev
     ```
 
 ### Getting shells into your container
 
-Your container and workspace is all set up!
+Your workspace is all set up!
 These are the kinds of shells you can get to your container.
 
 Use a normal shell to build, run, and test your workspace.
