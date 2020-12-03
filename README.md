@@ -8,4 +8,4 @@ If you want to use ROS in a container, the [`definition_files`](./definition_fil
 
 ## Workspace Workflow
 
-If you want to develop ROS or ROS based software inside a container, the [`ws_workflow`](./ws_workflow/README.md) describes a workflow for developing inside Singularity containers.
+If you want to develop ROS or ROS based software inside a container, see [`ws_workflow`](./ws_workflow/README.md) for a workflow to develop inside Singularity containers.
