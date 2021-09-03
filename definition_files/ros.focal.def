@@ -30,9 +30,7 @@ From: ubuntu:20.04
   update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
   export LANG=en_US.UTF-8
 
-  apt-add-repository restricted
   apt-add-repository universe
-  apt-add-repository multiverse
   apt-add-repository "deb http://security.ubuntu.com/ubuntu `lsb_release -cs`-security main restricted universe multiverse"
 
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
