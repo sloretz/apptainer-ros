@@ -1,0 +1,50 @@
+Bootstrap: docker
+From: almalinux:8
+
+%help
+  This is a container which is ready to install ROS.
+  It has tools for working with a ros installation, like rosdep and
+  rosinstall_generator, already installed.
+  This serves as a base for a ROS 2 installation.
+
+
+%labels
+  MAINTAINER Shane Loretz <sloretz@openrobotics.org>
+
+
+%post
+  # Enable EPEL and PowerTools repositories
+  dnf install epel-release epel-release 'dnf-command(config-manager)' --refresh -y
+  dnf config-manager --set-enabled powertools
+
+  # Get the ROS 2 repo file
+  curl --output /etc/yum.repos.d/ros2.repo http://packages.ros.org/ros2/rhel/ros2.repo
+
+  # Update the meatadata cache
+  dnf makecache
+
+  # Install stuff needed for building from source
+  dnf install \
+    langpacks-en \
+    glibc-langpack-en \
+    cmake \
+    gcc-c++ \
+    git \
+    glibc-langpack-en \
+    make \
+    patch \
+    python3-colcon-common-extensions \
+    python3-pip \
+    python3-rosdep \
+    python3-vcstool \
+    vim \
+    curl \
+    --refresh -y
+
+  # Initialize rosdep
+  rosdep init
+
+
+%environment
+  export LANG=en_US.UTF-8
+  # export ROS_PYTHON_VERSION=3
