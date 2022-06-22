@@ -2,10 +2,7 @@ Bootstrap: docker
 From: ubuntu:22.04
 
 %help
-  This is a container which is ready to install ROS.
-  It has tools for working with a ros installation, like rosdep and
-  rosinstall_generator, already installed.
-  This serves as a base for a ROS 2 installation.
+  This definition file makes a container that is ready to build ROS 2 on Ubuntu Jammy.
 
 
 %labels
@@ -52,4 +49,3 @@ From: ubuntu:22.04
 
 %environment
   export LANG=en_US.UTF-8
-  export ROS_PYTHON_VERSION=3

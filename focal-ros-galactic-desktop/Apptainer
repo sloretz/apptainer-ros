@@ -2,7 +2,9 @@ Bootstrap: docker
 From: ubuntu:20.04
 
 %help
-  This definition file makes a container that is ready to build ROS 1 or ROS 2 on Ubuntu Focal.
+  This definition file makes a container with ros-galactic-desktop already installed.
+  It also has tools for building packages against ROS Humble.
+
 
 %labels
   MAINTAINER Shane Loretz <sloretz@openrobotics.org>
@@ -31,9 +33,7 @@ From: ubuntu:20.04
 
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
-  echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros1-stable.list
-  echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2
-  .list
+  echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2.list
 
   apt-get update
   apt-get install -y \
@@ -43,6 +43,8 @@ From: ubuntu:20.04
     python3-colcon-common-extensions
 
   rosdep init
+
+  apt-get install -y ros-galactic-desktop
 
   rm -rf /var/lib/apt/lists/*
   apt-get clean

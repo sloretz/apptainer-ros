@@ -1,8 +1,12 @@
 Bootstrap: docker
-From: ubuntu:20.04
+From: debian:10
 
 %help
-  This definition file makes a container that is ready to build ROS 1 or ROS 2 on Ubuntu Focal.
+  This is a container which is ready to install ROS.
+  It has tools for working with a ros installation, like rosdep and
+  rosinstall_generator, already installed.
+  This serves as a base for a ROS Noetic or ROS Foxy installation.
+
 
 %labels
   MAINTAINER Shane Loretz <sloretz@openrobotics.org>
@@ -22,18 +26,19 @@ From: ubuntu:20.04
     build-essential \
     tzdata
 
-  locale-gen en_US en_US.UTF-8
-  update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-  export LANG=en_US.UTF-8
+  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+  locale-gen
+  locale -a
+  update-locale LANG="en_US.UTF-8"
+  export LANG="en_US.UTF-8"
 
-  apt-add-repository universe
-  apt-add-repository "deb http://security.ubuntu.com/ubuntu `lsb_release -cs`-security main restricted universe multiverse"
+  apt-add-repository contrib
 
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
+  # TODO(sloretz) use normal repos when Noetic and Foxy release
   echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros1-stable.list
-  echo "deb http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2
-  .list
+  echo "deb http://packages.ros.org/ros2-testing/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-testing.list
 
   apt-get update
   apt-get install -y \
@@ -50,3 +55,7 @@ From: ubuntu:20.04
 
 %environment
   export LANG=en_US.UTF-8
+  export ROS_PYTHON_VERSION=3
+
+
+# TODO(sloretz) runscript that makes directory $HOME/.ros if it doesn't exist and sources /opt/ros/noetic or /opt/ros/foxy if they exist?
