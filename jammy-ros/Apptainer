@@ -10,6 +10,9 @@ From: ubuntu:22.04
 
 
 %post
+  # Block searching the entire filesystem for packages when using a sandbox
+  touch /COLCON_IGNORE /CATKIN_IGNORE
+
   export DEBIAN_FRONTEND=noninteractive
 
   apt-get update

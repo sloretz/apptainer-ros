@@ -13,6 +13,9 @@ From: debian:10
 
 
 %post
+  # Block searching the entire filesystem for packages when using a sandbox
+  touch /COLCON_IGNORE /CATKIN_IGNORE
+
   export DEBIAN_FRONTEND=noninteractive
 
   apt-get update
